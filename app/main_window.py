@@ -3,12 +3,15 @@ from PyQt5.QtCore import Qt
 from .markdown_editor import MarkdownEditor
 from .markdown_preview import MarkdownPreview
 from .toolbar import Toolbar
+from .theme_manager import ThemeManager
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Markly")
         self.setGeometry(100, 100, 800, 600)
+
+        self.theme_manager = ThemeManager(self)
 
         self.toolbar = Toolbar(self)
         self.addToolBar(self.toolbar)
@@ -33,6 +36,9 @@ class MainWindow(QMainWindow):
 
         # Set the splitter as the central widget
         self.setCentralWidget(splitter)
+
+        # Apply the default theme
+        self.theme_manager.apply_theme("light")
 
     def update_status_bar(self, file_path):
         """Update the status bar with the current file path."""

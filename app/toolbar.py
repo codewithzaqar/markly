@@ -10,16 +10,19 @@ class Toolbar(QToolBar):
         self.open_action = QAction("Open", self)
         self.save_action = QAction("Save", self)
         self.save_as_action = QAction("Save As", self)
+        self.toggle_theme_action = QAction("Toggle Theme", self)
 
         # Connect actions to methods
         self.open_action.triggered.connect(self.open_file)
         self.save_action.triggered.connect(self.save_file)
         self.save_as_action.triggered.connect(self.save_file_as)
+        self.toggle_theme_action.triggered.connect(self.toggle_theme)
 
         # Add actions to the toolbar
         self.addAction(self.open_action)
         self.addAction(self.save_action)
         self.addAction(self.save_as_action)
+        self.addAction(self.toggle_theme_action)
 
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Markdown File", "", "Markdown Files (*.md);;All Files (*)")
@@ -55,3 +58,10 @@ class Toolbar(QToolBar):
                 QMessageBox.information(self, "Success", "File saved successfully!")
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to save file: {e}")
+
+    def toggle_theme(self):
+        """Toggle between light and dark themes."""
+        if self.parent.theme_manager.is_dark_theme():
+            self.parent.theme_manager.apply_theme("light")
+        else:
+            self.parent.theme_manager.apply_theme("dark")
