@@ -11,18 +11,24 @@ class Toolbar(QToolBar):
         self.save_action = QAction("Save", self)
         self.save_as_action = QAction("Save As", self)
         self.toggle_theme_action = QAction("Toggle Theme", self)
+        self.export_html_action = QAction("Export to HTML", self)
+        self.export_pdf_action = QAction("Export to PDF", self)
 
         # Connect actions to methods
         self.open_action.triggered.connect(self.open_file)
         self.save_action.triggered.connect(self.save_file)
         self.save_as_action.triggered.connect(self.save_file_as)
         self.toggle_theme_action.triggered.connect(self.toggle_theme)
+        self.export_html_action.triggered.connect(self.parent.export_manager.export_to_html)
+        self.export_pdf_action.triggered.connect(self.parent.export_manager.export_to_pdf)
 
         # Add actions to the toolbar
         self.addAction(self.open_action)
         self.addAction(self.save_action)
         self.addAction(self.save_as_action)
         self.addAction(self.toggle_theme_action)
+        self.addAction(self.export_html_action)
+        self.addAction(self.export_pdf_action)
 
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Markdown File", "", "Markdown Files (*.md);;All Files (*)")

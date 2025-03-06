@@ -4,6 +4,7 @@ from .markdown_editor import MarkdownEditor
 from .markdown_preview import MarkdownPreview
 from .toolbar import Toolbar
 from .theme_manager import ThemeManager
+from .export_manager import ExportManager
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -12,6 +13,8 @@ class MainWindow(QMainWindow):
         self.setGeometry(100, 100, 800, 600)
 
         self.theme_manager = ThemeManager(self)
+
+        self.export_manager = ExportManager(self)
 
         self.toolbar = Toolbar(self)
         self.addToolBar(self.toolbar)
