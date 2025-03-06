@@ -2,3 +2,12 @@ QTextEdit, QTextBrowser {
     font-family: 'Courier New', monospace;
     font-size: 14px;
 }
+
+QToolBar {
+    word-spacing: 5px;
+    padding: 5px;
+}
+
+QToolButton {
+    padding: 5px;
+}

@@ -2,12 +2,16 @@ from PyQt5.QtWidgets import QMainWindow, QSplitter
 from PyQt5.QtCore import Qt
 from .markdown_editor import MarkdownEditor
 from .markdown_preview import MarkdownPreview
+from .toolbar import Toolbar
 
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Markly")
         self.setGeometry(100, 100, 800, 600)
+
+        self.toolbar = Toolbar(self)
+        self.addToolBar(self.toolbar)
 
         # Create a splitter to divide the window into two parts
         splitter = QSplitter(Qt.Horizontal)
