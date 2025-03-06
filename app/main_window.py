@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QMainWindow, QSplitter
+from PyQt5.QtWidgets import QMainWindow, QSplitter, QStatusBar
 from PyQt5.QtCore import Qt
 from .markdown_editor import MarkdownEditor
 from .markdown_preview import MarkdownPreview
@@ -12,6 +12,10 @@ class MainWindow(QMainWindow):
 
         self.toolbar = Toolbar(self)
         self.addToolBar(self.toolbar)
+
+        self.status_bar = QStatusBar()
+        self.setStatusBar(self.status_bar)
+        self.status_bar.showMessage("No file opened")
 
         # Create a splitter to divide the window into two parts
         splitter = QSplitter(Qt.Horizontal)
@@ -29,3 +33,10 @@ class MainWindow(QMainWindow):
 
         # Set the splitter as the central widget
         self.setCentralWidget(splitter)
+
+    def update_status_bar(self, file_path):
+        """Update the status bar with the current file path."""
+        if file_path:
+            self.status_bar.showMessage(f"Editing: {file_path}")
+        else:
+            self.status_bar.showMessage("No file opened")

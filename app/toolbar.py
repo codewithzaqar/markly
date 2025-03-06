@@ -29,6 +29,7 @@ class Toolbar(QToolBar):
                     content = file.read()
                     self.parent.editor.setPlainText(content)
                     self.current_file = file_path
+                    self.parent.update_status_bar(file_path)
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to open file: {e}")
 
@@ -37,6 +38,7 @@ class Toolbar(QToolBar):
             try:
                 with open(self.current_file, "w", encoding="utf-8") as file:
                     file.write(self.parent.editor.toPlainText())
+                QMessageBox.information(self, "Success", "File saved successfully!")
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to save file: {e}")
         else:
@@ -49,5 +51,7 @@ class Toolbar(QToolBar):
                 with open(file_path, "w", encoding="utf-8") as file:
                     file.write(self.parent.editor.toPlainText())
                 self.current_file = file_path
+                self.parent.update_status_bar(file_path)
+                QMessageBox.information(self, "Success", "File saved successfully!")
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Failed to save file: {e}")

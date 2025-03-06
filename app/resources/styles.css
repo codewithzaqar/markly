@@ -11,3 +11,8 @@ QToolBar {
 QToolButton {
     padding: 5px;
 }
+
+QStatusBar {
+    font-size: 12px;
+    color: #333;
+}
