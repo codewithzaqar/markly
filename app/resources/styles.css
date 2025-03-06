@@ -1,6 +1,7 @@
 QTextEdit, QTextBrowser {
     font-family: 'Courier New', monospace;
     font-size: 14px;
+    background-color: #f9f9f9;
 }
 
 QToolBar {
