@@ -9,5 +9,8 @@ class MarkdownEditor(QTextEdit):
         self.setPlaceholderText("Write your Markdown here...")
         self.setFont(QFont("Courier New", 12))
 
+        # Enable undo/redo
+        self.setUndoRedoEnabled(True)
+
         # Initialize syntax highlighter
         self.highlighter = MarkdownHighlighter(self.document())

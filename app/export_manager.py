@@ -13,7 +13,7 @@ class ExportManager:
         if file_path:
             try:
                 markdown_text = self.parent.editor.toPlainText()
-                html_content = markdown(markdown_text)
+                html_content = markdown(markdown_text, extras=["tables", "footnotes"])
                 with open(file_path, "w", encoding="utf-8") as file:
                     file.write(html_content)
                 QMessageBox.information(self.parent, "Success", "File exported to HTML successfully!")
@@ -26,7 +26,7 @@ class ExportManager:
         if file_path:
             try:
                 markdown_text = self.parent.editor.toPlainText()
-                html_content = markdown(markdown_text)
+                html_content = markdown(markdown_text, extras=["tables", "footnotes"])
 
                 # Create a QTextDocument to render the HTML
                 document = QTextDocument()

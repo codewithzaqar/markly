@@ -13,13 +13,17 @@ class MainWindow(QMainWindow):
         self.setWindowTitle("Markly")
         self.setGeometry(100, 100, 800, 600)
 
+        # Initialize theme manager
         self.theme_manager = ThemeManager(self)
 
+        # Initialize export manager
         self.export_manager = ExportManager(self)
 
+        # Initialize the toolbar
         self.toolbar = Toolbar(self)
         self.addToolBar(self.toolbar)
 
+        # Initialize the status bar
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("No file opened")
@@ -28,7 +32,7 @@ class MainWindow(QMainWindow):
         splitter = QSplitter(Qt.Horizontal)
 
         # Create the Markdown editor and preview
-        self.editor = MarkdownEditor()
+        self.editor = MarkdownEditor()  # Public attribute
         self.preview = MarkdownPreview()
 
         # Connect the editor's text change signal to the preview's update slot
@@ -53,7 +57,7 @@ class MainWindow(QMainWindow):
         self.toolbar.open_action.setShortcut(QKeySequence("Ctrl+O"))
         self.toolbar.save_action.setShortcut(QKeySequence("Ctrl+S"))
         self.toolbar.save_as_action.setShortcut(QKeySequence("Ctrl+Shift+S"))
-        self.toolbar.export_html_action.setShortcut("Ctrl+E")
+        self.toolbar.export_html_action.setShortcut(QKeySequence("Ctrl+E"))
         self.toolbar.export_pdf_action.setShortcut(QKeySequence("Ctrl+P"))
 
     def update_status_bar(self, file_path):

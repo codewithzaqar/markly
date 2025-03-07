@@ -8,5 +8,5 @@ class MarkdownPreview(QTextBrowser):
 
     def update_preview(self):
         markdown_text = self.parent().parent().editor.toPlainText()
-        html = markdown(markdown_text)
+        html = markdown(markdown_text, extras=["tables", "footnotes"])
         self.setHtml(html)

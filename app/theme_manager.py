@@ -15,6 +15,13 @@ class ThemeManager:
             self._apply_light_theme()
             self.current_theme = "light"
 
+    def toggle_theme(self):
+        """Toggle between light and dark themes."""
+        if self.is_dark_theme():
+            self.apply_theme("light")
+        else:
+            self.apply_theme("dark")
+
     def is_dark_theme(self):
         """Check if the current theme is dark."""
         return self.current_theme == "dark"
