@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QSplitter, QStatusBar
-from PyQt5.QtCore import Qt
-from PyQt5.QtGui import QKeySequence
+from PyQt5.QtCore import Qt, QTimer
+from PyQt5.QtGui import QKeySequence, QIcon
 from .markdown_editor import MarkdownEditor
 from .markdown_preview import MarkdownPreview
 from .toolbar import Toolbar
@@ -34,7 +34,7 @@ class MainWindow(QMainWindow):
         splitter = QSplitter(Qt.Horizontal)
 
         # Create the Markdown editor and preview
-        self.editor = MarkdownEditor()  # Public attribute
+        self.editor = MarkdownEditor()
         self.preview = MarkdownPreview()
 
         # Connect the editor's text change signal to the preview's update slot
@@ -56,7 +56,7 @@ class MainWindow(QMainWindow):
         # Initialize spell checker
         self.spell_checker = SpellChecker(self.editor)
 
-        # Enable drag-adn-drop support
+        # Enable drag-and-drop support
         self.setAcceptDrops(True)
 
         # Initialize auto-save manager
