@@ -6,6 +6,7 @@ from .markdown_preview import MarkdownPreview
 from .toolbar import Toolbar
 from .theme_manager import ThemeManager
 from .export_manager import ExportManager
+from .spell_checker import SpellChecker
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -50,6 +51,9 @@ class MainWindow(QMainWindow):
 
         # Set up keyboard shortcuts
         self._setup_shortcuts()
+
+        # Initialize spell checker
+        self.spell_checker = SpellChecker(self.editor)
 
     def _setup_shortcuts(self):
         """Set up keyboard shortcuts for common actions."""
