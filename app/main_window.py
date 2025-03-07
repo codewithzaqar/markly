@@ -7,6 +7,7 @@ from .toolbar import Toolbar
 from .theme_manager import ThemeManager
 from .export_manager import ExportManager
 from .spell_checker import SpellChecker
+from .auto_save_manager import AutoSaveManager
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -55,6 +56,12 @@ class MainWindow(QMainWindow):
         # Initialize spell checker
         self.spell_checker = SpellChecker(self.editor)
 
+        # Enable drag-adn-drop support
+        self.setAcceptDrops(True)
+
+        # Initialize auto-save manager
+        self.auto_save_manager = AutoSaveManager(self)
+
     def _setup_shortcuts(self):
         """Set up keyboard shortcuts for common actions."""
         self.toolbar.new_action.setShortcut(QKeySequence("Ctrl+N"))
@@ -70,3 +77,16 @@ class MainWindow(QMainWindow):
             self.status_bar.showMessage(f"Editing: {file_path}")
         else:
             self.status_bar.showMessage("No file opened")
+
+    def dragEnterEvent(self, event):
+        """Handle drag enter event."""
+        if event.mimeData().hasUrls():
+            event.acceptProposedAction()
+
+    def dropEvent(self, event):
+        """Handle drop event."""
+        for url in event.mimeData().urls():
+            file_path = url.toLocalFile()
+            if file_path.endswith(".md"):
+                self.toolbar.open_file(file_path)
+                break
