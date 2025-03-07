@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QMainWindow, QSplitter, QStatusBar
 from PyQt5.QtCore import Qt
+from PyQt5.QtGui import QKeySequence
 from .markdown_editor import MarkdownEditor
 from .markdown_preview import MarkdownPreview
 from .toolbar import Toolbar
@@ -42,6 +43,18 @@ class MainWindow(QMainWindow):
 
         # Apply the default theme
         self.theme_manager.apply_theme("light")
+
+        # Set up keyboard shortcuts
+        self._setup_shortcuts()
+
+    def _setup_shortcuts(self):
+        """Set up keyboard shortcuts for common actions."""
+        self.toolbar.new_action.setShortcut(QKeySequence("Ctrl+N"))
+        self.toolbar.open_action.setShortcut(QKeySequence("Ctrl+O"))
+        self.toolbar.save_action.setShortcut(QKeySequence("Ctrl+S"))
+        self.toolbar.save_as_action.setShortcut(QKeySequence("Ctrl+Shift+S"))
+        self.toolbar.export_html_action.setShortcut("Ctrl+E")
+        self.toolbar.export_pdf_action.setShortcut(QKeySequence("Ctrl+P"))
 
     def update_status_bar(self, file_path):
         """Update the status bar with the current file path."""

@@ -7,6 +7,7 @@ class Toolbar(QToolBar):
         self.current_file = None
 
         # Create actions (without icons)
+        self.new_action = QAction("New", self)
         self.open_action = QAction("Open", self)
         self.save_action = QAction("Save", self)
         self.save_as_action = QAction("Save As", self)
@@ -15,6 +16,7 @@ class Toolbar(QToolBar):
         self.export_pdf_action = QAction("Export to PDF", self)
 
         # Connect actions to methods
+        self.new_action.triggered.connect(self.new_file)
         self.open_action.triggered.connect(self.open_file)
         self.save_action.triggered.connect(self.save_file)
         self.save_as_action.triggered.connect(self.save_file_as)
@@ -23,12 +25,19 @@ class Toolbar(QToolBar):
         self.export_pdf_action.triggered.connect(self.parent.export_manager.export_to_pdf)
 
         # Add actions to the toolbar
+        self.addAction(self.new_action)
         self.addAction(self.open_action)
         self.addAction(self.save_action)
         self.addAction(self.save_as_action)
         self.addAction(self.toggle_theme_action)
         self.addAction(self.export_html_action)
         self.addAction(self.export_pdf_action)
+
+    def new_file(self):
+        """Create a new file."""
+        self.parent.editor.clear()
+        self.current_file = None
+        self.parent.update_status_bar(None)
 
     def open_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Open Markdown File", "", "Markdown Files (*.md);;All Files (*)")
