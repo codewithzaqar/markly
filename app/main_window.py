@@ -8,6 +8,7 @@ from .theme_manager import ThemeManager
 from .export_manager import ExportManager
 from .spell_checker import SpellChecker
 from .auto_save_manager import AutoSaveManager
+from .language_manager import LanguageManager
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -55,6 +56,9 @@ class MainWindow(QMainWindow):
 
         # Initialize spell checker
         self.spell_checker = SpellChecker(self.editor)
+
+        # Initialize language manager
+        self.language_manager = LanguageManager(self.spell_checker)
 
         # Enable drag-and-drop support
         self.setAcceptDrops(True)

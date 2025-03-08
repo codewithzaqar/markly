@@ -5,7 +5,7 @@ from PyQt5.QtWidgets import QTextEdit
 class SpellChecker:
     def __init__(self, editor):
         self.editor = editor
-        self.dictionary = enchant.Dict("en_US")  # Use the US English dictionary
+        self.dictionary = enchant.Dict("en_US")  # Default to US English
         self.editor.textChanged.connect(self._check_spelling)
 
     def _check_spelling(self):
