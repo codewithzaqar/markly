@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox
 from markdown2 import markdown
 from PyQt5.QtPrintSupport import QPrinter
 from PyQt5.QtGui import QTextDocument
+import docx
 
 class ExportManager:
     def __init__(self, parent):
@@ -42,3 +43,19 @@ class ExportManager:
                 QMessageBox.information(self.parent, "Success", "File exported to PDF successfully!")
             except Exception as e:
                 QMessageBox.critical(self.parent, "Error", f"Failed to export to PDF: {e}")
+
+    def export_to_word(self):
+        """Export the Markdown content to a Word file."""
+        file_path, _ = QFileDialog.getSaveFileName(self.parent, "Export to Word", "", "Word Files (*.docx);;All Files (*)")
+        if file_path:
+            try:
+                markdown_text = self.parent.editor.toPlainText()
+                html_content = markdown(markdown_text, extras=["tables", "footnotes"])
+
+                # Create a new Word document
+                doc = docx.Document()
+                doc.add_paragraph(html_content)
+                doc.save(file_path)
+                QMessageBox.information(self.parent, "Success", "File exported to Word successfully!")
+            except Exception as e:
+                QMessageBox.critical(self.parent, "Error", f"Failed to export to Word: {e}")

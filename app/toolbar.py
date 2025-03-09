@@ -14,6 +14,7 @@ class Toolbar(QToolBar):
         self.toggle_theme_action = QAction("Toggle Theme", self)
         self.export_html_action = QAction("Export to HTML", self)
         self.export_pdf_action = QAction("Export to PDF", self)
+        self.export_word_action = QAction("Export to Word", self)
 
         # Connect actions to methods
         self.new_action.triggered.connect(self.new_file)
@@ -23,6 +24,7 @@ class Toolbar(QToolBar):
         self.toggle_theme_action.triggered.connect(self.toggle_theme)
         self.export_html_action.triggered.connect(self.parent.export_manager.export_to_html)
         self.export_pdf_action.triggered.connect(self.parent.export_manager.export_to_pdf)
+        self.export_word_action.triggered.connect(self.parent.export_manager.export_to_word)
 
         # Add actions to the toolbar
         self.addAction(self.new_action)
@@ -32,6 +34,7 @@ class Toolbar(QToolBar):
         self.addAction(self.toggle_theme_action)
         self.addAction(self.export_html_action)
         self.addAction(self.export_pdf_action)
+        self.addAction(self.export_word_action)
 
     def new_file(self):
         """Create a new file."""

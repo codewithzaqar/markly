@@ -78,6 +78,7 @@ class MainWindow(QMainWindow):
         self.toolbar.save_as_action.setShortcut(QKeySequence("Ctrl+Shift+S"))
         self.toolbar.export_html_action.setShortcut(QKeySequence("Ctrl+E"))
         self.toolbar.export_pdf_action.setShortcut(QKeySequence("Ctrl+P"))
+        self.toolbar.export_word_action.setShortcut(QKeySequence("Ctrl+W"))
 
     def update_status_bar(self, file_path):
         """Update the status bar with the current file path."""
