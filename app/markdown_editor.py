@@ -11,3 +11,14 @@ class MarkdownEditor(QTextEdit):
 
         # Initialize syntax highlighter
         self.highlighter = MarkdownHighlighter(self.document())
+
+    def setCompleter(self, completer):
+        """Set the completer for the editor."""
+        self.completer = completer
+        self.completer.setWidget(self)
+        self.completer.activated.connect(self.insertCompletion)
+
+    def insertCompletion(self, completion):
+        """Insert the selected completion into the editor."""
+        cursor = self.textCursor()
+        cursor.insertText(completion)

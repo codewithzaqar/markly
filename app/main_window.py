@@ -9,6 +9,7 @@ from .export_manager import ExportManager
 from .spell_checker import SpellChecker
 from .auto_save_manager import AutoSaveManager
 from .language_manager import LanguageManager
+from .auto_completer import AutoCompleter
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -65,6 +66,9 @@ class MainWindow(QMainWindow):
 
         # Initialize auto-save manager
         self.auto_save_manager = AutoSaveManager(self)
+
+        # Initialize auto-completer
+        self.auto_completer = AutoCompleter(self.editor)
 
     def _setup_shortcuts(self):
         """Set up keyboard shortcuts for common actions."""
